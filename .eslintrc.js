@@ -5,9 +5,10 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-native/all',
     'plugin:prettier/recommended',
+    'plugin:@tailwindcss/recommended',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['react', 'react-native', '@typescript-eslint'],
+  plugins: ['react', 'react-native', '@typescript-eslint', '@tailwindcss'],
   env: {
     'react-native/react-native': true,
     browser: true,
@@ -28,6 +29,8 @@ module.exports = {
     semi: ['error', 'always'],
 
     'prettier/prettier': 'error',
+
+    'unknownAtRule': 'off',
   },
   settings: {
     react: {
