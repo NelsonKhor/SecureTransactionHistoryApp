@@ -7,7 +7,21 @@ module.exports = {
   ],
   presets: [require('nativewind/preset')],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primaryBlue: '#00B4F0',
+        secondaryBlue: '#0021fd',
+        black: '#000000',
+        grey: '#aaaaaa',
+        white: '#ffffff',
+      },
+      fontFamily: {
+        spacemono: ['SpaceMono-Regular', 'sans-serif'],
+        robotoRegular: ['Roboto-Regular', 'san-serif'],
+        robotoBold: ['Roboto-Bold', 'san-serif'],
+        robotoLight: ['Roboto-Light', 'san-serif'],
+      }
+    },
   },
   plugins: [],
 };
