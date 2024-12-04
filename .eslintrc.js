@@ -1,9 +1,37 @@
-// https://docs.expo.dev/guides/using-eslint/
 module.exports = {
-  extends: ["expo", "prettier"],
-  plugins: ["prettier"],
-  ignorePatterns: ["/dist/*"],
+  root: true,
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-native/all',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react', 'react-native', '@typescript-eslint'],
+  env: {
+    'react-native/react-native': true,
+    browser: true,
+    es2021: true,
+    node: true,
+  },
   rules: {
-    "prettier/prettier": "error",
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/jsx-uses-vars': 'error',
+
+    'react-native/no-inline-styles': 'off',
+    'react-native/no-color-literals': 'off',
+    'react-native/no-raw-text': 'off',
+
+    'no-unused-vars': 'warn',
+    'no-console': 'warn',
+    semi: ['error', 'always'],
+
+    'prettier/prettier': 'error',
+  },
+  settings: {
+    react: {
+      version: 'detect', // Automatically detect the react version
+    },
   },
 };
