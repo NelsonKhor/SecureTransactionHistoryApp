@@ -1,50 +1,89 @@
-import { Tabs } from "expo-router";
-import React from "react";
-import { Platform } from "react-native";
+import { View, Text, Image, ImageSourcePropType, ImageResizeMode, BackHandler } from 'react-native'
+import React, { useCallback } from 'react'
+import { Tabs, Redirect, useFocusEffect } from 'expo-router'
+import icons from '../../assets/icons/icons'
 
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+export interface TabIconProps {
+    icon: string | ImageSourcePropType
+    color: string
+    name: string
+    isFocused: boolean
+}
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+function useBackHandler() {
+    useFocusEffect(
+        useCallback(() => {
+            const onBackPress = () => {
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, [])
+    );
+}
 
+function TabIcon({ icon, color, name, isFocused }: TabIconProps) {
+    const source = typeof icon === 'string' ? { uri: icon } : icon
+
+    return (
+        <View className='items-center justify-center gap-2'>
+            <Image
+                source={source}
+                resizeMode='contain'
+                tintColor={color}
+                className='h-6 w-6'
+            />
+            <Text className={`${isFocused ? 'font-robotoBold' : 'font-robotoRegular'} w-20 text-center`}>
+                {name}
+            </Text>
+        </View>
+    )
+}
+
+export default function TabsLayout() {
+    useBackHandler()
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+    <>
+        <Tabs
+            screenOptions={{
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    height: 70,
+                    paddingTop: 15,
+                }
+            }}
+        >
+            <Tabs.Screen
+                name="home"
+                options={{
+                    title: 'Home',
+                    headerShown: false,
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabIcon
+                            icon={icons.home}
+                            color={color}
+                            name="Home"
+                            isFocused={focused}
+                        />
+                    )
+                }}
+            />
+            <Tabs.Screen
+                name="setting"
+                options={{
+                    title: 'Home',
+                    headerShown: false,
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabIcon
+                            icon={icons.settings}
+                            color={color}
+                            name="Settings"
+                            isFocused={focused}
+                        />
+                    )
+                }}
+            />
+        </Tabs>
+    </>
+  )
 }
