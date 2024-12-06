@@ -1,15 +1,16 @@
 import { Alert, Button, Text, View, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import * as LocalAuthentication from "expo-local-authentication"
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
+import useStore from './store/useStore';
 
-export default function App() {
-  const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-  console.log(isBiometricSupported)
+export default function App(): ReactElement {
+  const [isBiometricSupported, setIsBiometricSupported] = useState<boolean>(false);
+  const setIsLoggedin = useStore((state) => state.setIsLoggedin);
 
-  async function loginAuth() {
+  async function loginAuth(): Promise<void> {
     try {
       const hasHardwareAuth = await LocalAuthentication.hasHardwareAsync()
       const isEnrolledAuth = await LocalAuthentication.isEnrolledAsync()
@@ -17,10 +18,10 @@ export default function App() {
 
       setIsBiometricSupported(supportedAuth.length > 0)
       
-
       if (hasHardwareAuth && isEnrolledAuth) {
-        const respond = await LocalAuthentication.authenticateAsync();
+        const respond: LocalAuthentication.LocalAuthenticationResult = await LocalAuthentication.authenticateAsync();
         if (respond.success) {
+          setIsLoggedin(true);
           router.push('/home');
         }
       } else {
@@ -31,7 +32,12 @@ export default function App() {
         );
       }
     } catch (error) {
-      console.log('Authentication error:', error)
+      console.error('Authentication error:', error);
+      Alert.alert(
+        'Unexpected Error',
+        'An unexpected error occurred during authentication.',
+        [{ text: 'OK' }]
+      );
     }
   }
 
