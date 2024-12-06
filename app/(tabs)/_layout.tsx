@@ -1,6 +1,6 @@
-import { View, Text, Image, ImageSourcePropType, ImageResizeMode } from 'react-native'
-import React from 'react'
-import { Tabs, Redirect } from 'expo-router'
+import { View, Text, Image, ImageSourcePropType, ImageResizeMode, BackHandler } from 'react-native'
+import React, { useCallback } from 'react'
+import { Tabs, Redirect, useFocusEffect } from 'expo-router'
 import icons from '../../assets/icons/icons'
 
 export interface TabIconProps {
@@ -8,6 +8,18 @@ export interface TabIconProps {
     color: string
     name: string
     isFocused: boolean
+}
+
+function useBackHandler() {
+    useFocusEffect(
+        useCallback(() => {
+            const onBackPress = () => {
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, [])
+    );
 }
 
 function TabIcon({ icon, color, name, isFocused }: TabIconProps) {
@@ -29,6 +41,7 @@ function TabIcon({ icon, color, name, isFocused }: TabIconProps) {
 }
 
 export default function TabsLayout() {
+    useBackHandler()
   return (
     <>
         <Tabs
