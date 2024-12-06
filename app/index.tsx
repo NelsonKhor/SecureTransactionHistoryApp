@@ -41,7 +41,7 @@ export default function App() {
         <Link href="/home" style={{ color: 'blue' }}>
           Login to Home
         </Link>
-        <FontAwesome5 name="fingerprint" size={36} color="black" className="pt-5" />
+        <FontAwesome5 name="fingerprint" size={36} color="black" className="pt-5" onPress={loginAuth()}/>
       </View>
     </>
   );
