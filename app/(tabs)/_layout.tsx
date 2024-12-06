@@ -4,22 +4,24 @@ import { Tabs, Redirect } from 'expo-router'
 import icons from '../../assets/icons/icons'
 
 export interface TabIconProps {
-    icon: string
+    icon: string | ImageSourcePropType
     color: string
     name: string
-    focused: boolean
+    isFocused: boolean
 }
 
-function TabIcon({ icon, color, name, focused }: TabIconProps) {
+function TabIcon({ icon, color, name, isFocused }: TabIconProps) {
+    const source = typeof icon === 'string' ? { uri: icon } : icon
+
     return (
         <View className='items-center justify-center gap-2'>
             <Image
-                source={icon as ImageSourcePropType}
+                source={source}
                 resizeMode='contain'
                 tintColor={color}
-                className='h-1/2 w-1/2'
+                className='h-6 w-6'
             />
-            <Text className={`${focused ? 'font-robotoBold' : 'font-robotoRegular'}`}>
+            <Text className={`${isFocused ? 'font-robotoBold' : 'font-robotoRegular'}`}>
                 {name}
             </Text>
         </View>
@@ -34,6 +36,7 @@ export default function TabsLayout() {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     height: 70,
+                    paddingTop: 15,
                 }
             }}
         >
@@ -47,7 +50,7 @@ export default function TabsLayout() {
                             icon={icons.home}
                             color={color}
                             name="Home"
-                            focused={focused}
+                            isFocused={focused}
                         />
                     )
                 }}
@@ -62,7 +65,7 @@ export default function TabsLayout() {
                             icon={icons.settings}
                             color={color}
                             name="Settings"
-                            focused={focused}
+                            isFocused={focused}
                         />
                     )
                 }}
