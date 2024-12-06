@@ -21,7 +21,7 @@ function TabIcon({ icon, color, name, isFocused }: TabIconProps) {
                 tintColor={color}
                 className='h-6 w-6'
             />
-            <Text className={`${isFocused ? 'font-robotoBold' : 'font-robotoRegular'}`}>
+            <Text className={`${isFocused ? 'font-robotoBold' : 'font-robotoRegular'} w-20 text-center`}>
                 {name}
             </Text>
         </View>
