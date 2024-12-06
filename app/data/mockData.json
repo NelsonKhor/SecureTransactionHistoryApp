@@ -1,0 +1,143 @@
+[
+    {
+      "id": 1,
+      "amount": 250.75,
+      "date": "2024-12-01",
+      "description": "Salary Payment",
+      "type": "credit"
+    },
+    {
+      "id": 2,
+      "amount": 45.50,
+      "date": "2024-12-02",
+      "description": "Grocery Shopping",
+      "type": "debit"
+    },
+    {
+      "id": 3,
+      "amount": 120.00,
+      "date": "2024-11-28",
+      "description": "Electricity Bill",
+      "type": "debit"
+    },
+    {
+      "id": 4,
+      "amount": 300.00,
+      "date": "2024-11-30",
+      "description": "Freelance Work",
+      "type": "credit"
+    },
+    {
+      "id": 5,
+      "amount": 60.00,
+      "date": "2024-11-29",
+      "description": "Dinner with Friends",
+      "type": "debit"
+    },
+    {
+      "id": 6,
+      "amount": 200.00,
+      "date": "2024-12-01",
+      "description": "Gift from Family",
+      "type": "credit"
+    },
+    {
+      "id": 7,
+      "amount": 15.00,
+      "date": "2024-12-02",
+      "description": "Subscription Fee",
+      "type": "debit"
+    },
+    {
+      "id": 8,
+      "amount": 450.00,
+      "date": "2024-11-27",
+      "description": "Bonus Payment",
+      "type": "credit"
+    },
+    {
+      "id": 9,
+      "amount": 22.50,
+      "date": "2024-11-28",
+      "description": "Coffee Shop",
+      "type": "debit"
+    },
+    {
+      "id": 10,
+      "amount": 300.00,
+      "date": "2024-11-30",
+      "description": "Stock Dividends",
+      "type": "credit"
+    },
+    {
+      "id": 11,
+      "amount": 75.00,
+      "date": "2024-12-01",
+      "description": "Fuel Expense",
+      "type": "debit"
+    },
+    {
+      "id": 12,
+      "amount": 500.00,
+      "date": "2024-11-26",
+      "description": "Project Payment",
+      "type": "credit"
+    },
+    {
+      "id": 13,
+      "amount": 35.00,
+      "date": "2024-11-27",
+      "description": "Lunch with Colleague",
+      "type": "debit"
+    },
+    {
+      "id": 14,
+      "amount": 250.00,
+      "date": "2024-11-29",
+      "description": "Side Hustle Income",
+      "type": "credit"
+    },
+    {
+      "id": 15,
+      "amount": 12.00,
+      "date": "2024-11-30",
+      "description": "Parking Fee",
+      "type": "debit"
+    },
+    {
+      "id": 16,
+      "amount": 100.00,
+      "date": "2024-12-01",
+      "description": "Refund from Vendor",
+      "type": "credit"
+    },
+    {
+      "id": 17,
+      "amount": 8.50,
+      "date": "2024-12-02",
+      "description": "Snacks",
+      "type": "debit"
+    },
+    {
+      "id": 18,
+      "amount": 700.00,
+      "date": "2024-11-25",
+      "description": "Loan Payment",
+      "type": "credit"
+    },
+    {
+      "id": 19,
+      "amount": 55.00,
+      "date": "2024-11-27",
+      "description": "Utility Bill",
+      "type": "debit"
+    },
+    {
+      "id": 20,
+      "amount": 350.00,
+      "date": "2024-11-30",
+      "description": "Monthly Rent",
+      "type": "debit"
+    }
+]
+  

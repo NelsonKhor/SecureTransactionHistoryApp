@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import '../global.css';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,8 +23,12 @@ export default function RootLayout() {
   if(!fontsLoaded && !error) return null;
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    // <SafeAreaProvider>
+      // <SafeAreaView>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        </Stack>
+      // </SafeAreaView>
+    // </SafeAreaProvider>
   );
 }
