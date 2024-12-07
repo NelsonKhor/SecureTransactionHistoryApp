@@ -1,143 +1,143 @@
 [
     {
       "id": 1,
-      "amount": 250.75,
+      "amount": 1000.75,
       "date": "2024-12-01",
-      "description": "Salary Payment",
+      "description": "Salary",
       "type": "credit"
     },
     {
       "id": 2,
       "amount": 45.50,
-      "date": "2024-12-02",
-      "description": "Grocery Shopping",
+      "date": "2024-12-01",
+      "description": "Grocery",
       "type": "debit"
     },
     {
       "id": 3,
       "amount": 120.00,
       "date": "2024-11-28",
-      "description": "Electricity Bill",
+      "description": "Electricity bill",
       "type": "debit"
     },
     {
       "id": 4,
       "amount": 300.00,
-      "date": "2024-11-30",
-      "description": "Freelance Work",
+      "date": "2024-11-27",
+      "description": "Freelance work",
       "type": "credit"
     },
     {
       "id": 5,
       "amount": 60.00,
-      "date": "2024-11-29",
-      "description": "Dinner with Friends",
+      "date": "2024-11-26",
+      "description": "Dinner with friends",
       "type": "debit"
     },
     {
       "id": 6,
       "amount": 200.00,
-      "date": "2024-12-01",
-      "description": "Gift from Family",
+      "date": "2024-11-25",
+      "description": "Transfer from Wai Choong",
       "type": "credit"
     },
     {
       "id": 7,
       "amount": 15.00,
-      "date": "2024-12-02",
-      "description": "Subscription Fee",
+      "date": "2024-11-20",
+      "description": "Netflix",
       "type": "debit"
     },
     {
       "id": 8,
       "amount": 450.00,
-      "date": "2024-11-27",
-      "description": "Bonus Payment",
-      "type": "credit"
+      "date": "2024-11-19",
+      "description": "Grocery",
+      "type": "debit"
     },
     {
       "id": 9,
-      "amount": 22.50,
-      "date": "2024-11-28",
-      "description": "Coffee Shop",
+      "amount": 12.50,
+      "date": "2024-11-18",
+      "description": "Zus Coffee",
       "type": "debit"
     },
     {
       "id": 10,
-      "amount": 300.00,
-      "date": "2024-11-30",
-      "description": "Stock Dividends",
-      "type": "credit"
+      "amount": 1000.00,
+      "date": "2024-11-12",
+      "description": "New TV",
+      "type": "debit"
     },
     {
       "id": 11,
       "amount": 75.00,
-      "date": "2024-12-01",
-      "description": "Fuel Expense",
+      "date": "2024-11-01",
+      "description": "Petrol",
       "type": "debit"
     },
     {
       "id": 12,
-      "amount": 500.00,
-      "date": "2024-11-26",
-      "description": "Project Payment",
+      "amount": 1000.00,
+      "date": "2024-10-31",
+      "description": "Salary",
       "type": "credit"
     },
     {
       "id": 13,
       "amount": 35.00,
-      "date": "2024-11-27",
-      "description": "Lunch with Colleague",
+      "date": "2024-10-27",
+      "description": "Lunch with colleague",
       "type": "debit"
     },
     {
       "id": 14,
-      "amount": 250.00,
-      "date": "2024-11-29",
-      "description": "Side Hustle Income",
-      "type": "credit"
+      "amount": 50.00,
+      "date": "2024-10-25",
+      "description": "Cat food",
+      "type": "debit"
     },
     {
       "id": 15,
       "amount": 12.00,
-      "date": "2024-11-30",
+      "date": "2024-10-24",
       "description": "Parking Fee",
       "type": "debit"
     },
     {
       "id": 16,
       "amount": 100.00,
-      "date": "2024-12-01",
-      "description": "Refund from Vendor",
+      "date": "2024-10-21",
+      "description": "Refund",
       "type": "credit"
     },
     {
       "id": 17,
       "amount": 8.50,
-      "date": "2024-12-02",
-      "description": "Snacks",
+      "date": "2024-10-20",
+      "description": "Mixue",
       "type": "debit"
     },
     {
       "id": 18,
-      "amount": 700.00,
-      "date": "2024-11-25",
-      "description": "Loan Payment",
+      "amount": 100.00,
+      "date": "2024-10-16",
+      "description": "Dinner split",
       "type": "credit"
     },
     {
       "id": 19,
       "amount": 55.00,
-      "date": "2024-11-27",
-      "description": "Utility Bill",
+      "date": "2024-10-15",
+      "description": "Electricity bill",
       "type": "debit"
     },
     {
       "id": 20,
-      "amount": 350.00,
-      "date": "2024-11-30",
-      "description": "Monthly Rent",
-      "type": "debit"
+      "amount": 1000.00,
+      "date": "2024-9-30",
+      "description": "Salary",
+      "type": "credit"
     }
 ]
   
