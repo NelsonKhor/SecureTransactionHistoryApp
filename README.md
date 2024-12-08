@@ -11,11 +11,11 @@ This is a demo secure transaction app built with React Native.
 
 # Tech Stack
 
-Language: TypeScript
-Framework: React Native, Expo
-State Management: Zustand
-Navigation: Expo-router
-Styling: Tailwind css
+- Language: TypeScript  
+- Framework: React Native, Expo  
+- State Management: Zustand  
+- Navigation: Expo-router  
+- Styling: Tailwind css  
 
 # Prerequisites
 
