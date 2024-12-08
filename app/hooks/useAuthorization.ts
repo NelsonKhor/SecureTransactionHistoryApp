@@ -7,7 +7,7 @@ export default function useAuthorization() {
   const isAuthorized = useStore((state) => state.isAuthorized);
   const setIsAuthorized = useStore((state) => state.setIsAuthorized);
 
-  const toggleAuthorization = useCallback(async (): Promise<void> => {
+  const onToggleAuthorization = useCallback(async (): Promise<void> => {
     try {
       if (isAuthorized) {
         setIsAuthorized(false);
@@ -48,6 +48,6 @@ export default function useAuthorization() {
       }
     }, [isAuthorized, setIsAuthorized]);
   
-  return { isAuthorized, toggleAuthorization };
+  return { isAuthorized, onToggleAuthorization };
 }
   

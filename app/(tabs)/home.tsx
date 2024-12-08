@@ -8,7 +8,7 @@ import useAuthorization from '../hooks/useAuthorization';
 
 export default function Home(): ReactElement {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const { isAuthorized, toggleAuthorization } = useAuthorization();
+  const { isAuthorized, onToggleAuthorization } = useAuthorization();
 
   const onRefresh = useCallback(() => {
     setIsRefreshing(true);
@@ -31,14 +31,14 @@ export default function Home(): ReactElement {
               name="eye"
               size={24}
               color="black"
-              onPress={() => toggleAuthorization()}
+              onPress={() => onToggleAuthorization()}
             />
           ) : (
             <FontAwesome5
               name="eye-slash"
               size={24}
               color="black"
-              onPress={() => toggleAuthorization()}
+              onPress={() => onToggleAuthorization()}
             />
           )}
         </View>

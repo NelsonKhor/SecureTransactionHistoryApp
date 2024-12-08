@@ -9,7 +9,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 export default function TransactionDetails() {
   const { id, amount, date, description, type } = useLocalSearchParams();
   const isAuthorized = useStore((state) => state.isAuthorized);
-  const { toggleAuthorization } = useAuthorization();
+  const { onToggleAuthorization } = useAuthorization();
 
   return (
     <View className="flex-1 bg-gray-100 p-6">
@@ -25,7 +25,7 @@ export default function TransactionDetails() {
             RM {isAuthorized ? Number(amount).toFixed(2) : '*****'}
           </Text>
           {!isAuthorized && (
-            <TouchableOpacity className="p-1" onPress={toggleAuthorization}>
+            <TouchableOpacity className="p-1" onPress={onToggleAuthorization}>
               <FontAwesome5 name="eye-slash" size={32} color="gray" />
             </TouchableOpacity>
           )}
