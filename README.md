@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# Project Overview - Secure Transaction History App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a demo secure transaction app built with React Native.
 
-## Get started
+# Features
 
-1. Install dependencies
+- Secure access with biometric authentication.
+- View detailed transaction history.
+- Smooth navigation with Expo Router.
+- Optimized for development and testing on mobile devices.
+
+# Tech Stack
+
+Language: TypeScript
+Framework: React Native, Expo
+State Management: Zustand
+Navigation: Expo-router
+Styling: Tailwind css
+
+# Prerequisites
+
+- Ensure you have Expo Go installed on your mobile device.
+- Make sure your mobile device and development machine are connected to the same local Wi-Fi network.
+- Although web support is available, some features (e.g., biometric authentication) are not supported in a web environment.
+- For a complete experience, run the app on a physical device via Expo Go.
+
+## Setup and Installation
+
+1. Clone the repository
+
+   ```bash
+      git clone https://github.com/NelsonKhor/SecureTransactionHistoryApp.git
+      cd SecureTransactionHistoryApp
+   ```
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. Launch the app in Expo Go
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Scan the QR code displayed in your terminal or browser with Expo Go.
+- The app will launch on your mobile device.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+# Thoughts and Future Improvements
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+TBC
