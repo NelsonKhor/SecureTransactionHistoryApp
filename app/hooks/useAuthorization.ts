@@ -3,7 +3,12 @@ import { Alert } from 'react-native';
 import useStore from '../store/useStore';
 import * as LocalAuthentication from 'expo-local-authentication';
 
-export default function useAuthorization() {
+export interface AuthorizationHook {
+  isAuthorized: boolean;
+  onToggleAuthorization: () => Promise<void>;
+}
+
+export default function useAuthorization(): AuthorizationHook {
   const isAuthorized = useStore((state) => state.isAuthorized);
   const setIsAuthorized = useStore((state) => state.setIsAuthorized);
 
@@ -29,25 +34,24 @@ export default function useAuthorization() {
       const result: LocalAuthentication.LocalAuthenticationResult =
         await LocalAuthentication.authenticateAsync();
 
-        if (result.success) {
-          setIsAuthorized(true);
-        } else {
-          Alert.alert(
-            'Authentication Failed',
-            'Biometric authentication failed. Please try again.',
-            [{ text: 'OK' }]
-          );
-        }
-      } catch (error) {
-        console.error('Authentication error:', error);
+      if (result.success) {
+        setIsAuthorized(true);
+      } else {
         Alert.alert(
-          'Unexpected Error',
-          'An unexpected error occurred during authentication.',
+          'Authentication Failed',
+          'Biometric authentication failed. Please try again.',
           [{ text: 'OK' }]
         );
       }
-    }, [isAuthorized, setIsAuthorized]);
-  
+    } catch (error) {
+      console.error('Authentication error:', error);
+      Alert.alert(
+        'Unexpected Error',
+        'An unexpected error occurred during authentication.',
+        [{ text: 'OK' }]
+      );
+    }
+  }, [isAuthorized, setIsAuthorized]);
+
   return { isAuthorized, onToggleAuthorization };
 }
-  

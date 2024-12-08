@@ -1,12 +1,12 @@
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Text, View, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import useStore from '../../store/useStore';
 import { TransactionType } from '../../components/models';
 import useAuthorization from '../../hooks/useAuthorization';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-export default function TransactionDetails() {
+export default function TransactionDetails(): ReactElement {
   const { id, amount, date, description, type } = useLocalSearchParams();
   const isAuthorized = useStore((state) => state.isAuthorized);
   const { onToggleAuthorization } = useAuthorization();

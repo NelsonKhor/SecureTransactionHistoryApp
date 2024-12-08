@@ -1,6 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
+import { ReactElement } from 'react';
 
-export default function TransactionDetailLayout() {
+export default function TransactionDetailLayout(): ReactElement {
   const { id } = useLocalSearchParams();
   return (
     <Stack

@@ -1,19 +1,35 @@
-import { View, Text, FlatList, RefreshControl, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  RefreshControl,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import React, { ReactElement, useCallback, useState } from 'react';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import TransactionItem from '../components/TransactionItem';
+import TransactionItem, {
+  TransactionItemProps,
+} from '../components/TransactionItem';
 import { TransactionType } from '../components/models';
 import mockData from '../data/mockData.json';
 import useAuthorization from '../hooks/useAuthorization';
+import { generateTransactionData } from '../utils/utils'
 
 export default function Home(): ReactElement {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const { isAuthorized, onToggleAuthorization } = useAuthorization();
+  const [data, setData] = useState<TransactionItemProps[]>(
+    mockData as TransactionItemProps[]
+  );
 
-  const onRefresh = useCallback(() => {
+  const onRefresh = useCallback((): void => {
     setIsRefreshing(true);
-    // mock fetching data for 2 sec
     setTimeout(() => {
+      // mock fetching new data, then add it to the top of the list
+      let mockNewData = generateTransactionData();
+      setData((prevData) => [mockNewData, ...prevData]);
+      // mimic a loading time of 2 seconds
       setIsRefreshing(false);
     }, 2000);
   }, []);
@@ -25,26 +41,31 @@ export default function Home(): ReactElement {
         <Text className="font-robotoRegular text-xl">
           You can view your transaction history below.
         </Text>
-        <View className="m-2">
-          {isAuthorized ? (
-            <FontAwesome5
-              name="eye"
-              size={24}
-              color="black"
-              onPress={() => onToggleAuthorization()}
-            />
-          ) : (
-            <FontAwesome5
-              name="eye-slash"
-              size={24}
-              color="black"
-              onPress={() => onToggleAuthorization()}
-            />
-          )}
+        <View className="flex-row items-start mt-2">
+          <Text>
+            Toggle to mask/unmask sensitive data: 
+          </Text>
+          <TouchableOpacity className="p-1" onPress={onToggleAuthorization}>
+            {isAuthorized ? (
+              <FontAwesome5
+                name="eye"
+                size={24}
+                color="gray"
+                onPress={() => onToggleAuthorization()}
+              />
+            ) : (
+              <FontAwesome5
+                name="eye-slash"
+                size={24}
+                color="gray"
+                onPress={() => onToggleAuthorization()}
+              />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
       <FlatList
-        data={mockData}
+        data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={(transaction) => (
           <TransactionItem

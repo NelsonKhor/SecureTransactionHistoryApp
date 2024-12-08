@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
@@ -6,7 +6,7 @@ import '../global.css';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function AppLayout() {
+export default function AppLayout(): ReactElement | null {
   const [fontsLoaded, error] = useFonts({
     'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Bold': require('../assets/fonts/Roboto-Bold.ttf'),
@@ -19,7 +19,9 @@ export default function AppLayout() {
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded, error]);
 
-  if (!fontsLoaded && !error) return null;
+  if (!fontsLoaded && !error) {
+    return null;
+  }
 
   return (
     <SafeAreaProvider>
