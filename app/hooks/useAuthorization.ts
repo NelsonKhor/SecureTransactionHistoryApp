@@ -1,56 +1,53 @@
+import { useCallback } from 'react';
 import { Alert } from 'react-native';
-import * as LocalAuthentication from "expo-local-authentication"
 import useStore from '../store/useStore';
+import * as LocalAuthentication from 'expo-local-authentication';
 
-export interface AuthorizationHook {
-  onAuthorized: () => Promise<void>
-  onUnauthorized: () => Promise<void>
-}
+export default function useAuthorization() {
+  const isAuthorized = useStore((state) => state.isAuthorized);
+  const setIsAuthorized = useStore((state) => state.setIsAuthorized);
 
-export default function useAuthorization(): AuthorizationHook {
-  const { isAuthorized, setIsAuthorized } = useStore((state) => ({
-    isAuthorized: state.isAuthorized,
-    setIsAuthorized: state.setIsAuthorized,
-  }));
-
-  async function onAuthorized(): Promise<void> {
+  const toggleAuthorization = useCallback(async (): Promise<void> => {
     try {
-      const hasHardwareAuth = await LocalAuthentication.hasHardwareAsync()
-      const isEnrolledAuth = await LocalAuthentication.isEnrolledAsync()
-      
-      if (hasHardwareAuth && isEnrolledAuth && !isAuthorized) {
-        const respond: LocalAuthentication.LocalAuthenticationResult = await LocalAuthentication.authenticateAsync();
-        if (respond.success) {
-          setIsAuthorized(true);
-        } else {
-          setIsAuthorized(false);
-        }
-      } else {
+      if (isAuthorized) {
+        setIsAuthorized(false);
+        return;
+      }
+
+      const hasHardware = await LocalAuthentication.hasHardwareAsync();
+      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+
+      if (!hasHardware || !isEnrolled) {
         Alert.alert(
           'Authentication Error',
           'Biometric authentication is not supported or enrolled on this device.',
           [{ text: 'OK' }]
         );
+        return;
       }
-    } catch (error) {
-      console.error('Authentication error:', error);
-      Alert.alert(
-        'Unexpected Error',
-        'An unexpected error occurred during authentication.',
-        [{ text: 'OK' }]
-      );
-    }
-  }
 
-  async function onUnauthorized(): Promise<void> {
-    try {
-      setIsAuthorized(false)
-    } catch (error) {
-    }
-  }
+      const result: LocalAuthentication.LocalAuthenticationResult =
+        await LocalAuthentication.authenticateAsync();
 
-  return {
-    onAuthorized,
-    onUnauthorized,
-  }
+        if (result.success) {
+          setIsAuthorized(true);
+        } else {
+          Alert.alert(
+            'Authentication Failed',
+            'Biometric authentication failed. Please try again.',
+            [{ text: 'OK' }]
+          );
+        }
+      } catch (error) {
+        console.error('Authentication error:', error);
+        Alert.alert(
+          'Unexpected Error',
+          'An unexpected error occurred during authentication.',
+          [{ text: 'OK' }]
+        );
+      }
+    }, [isAuthorized, setIsAuthorized]);
+  
+  return { isAuthorized, toggleAuthorization };
 }
+  

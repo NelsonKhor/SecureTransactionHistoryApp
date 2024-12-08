@@ -1,17 +1,14 @@
-import { View, Text, FlatList, RefreshControl } from 'react-native'
-import React, { ReactElement, useCallback, useState } from 'react'
-import TransactionItem from '../components/TransactionItem'
-import { TransactionType } from '../components/models'
+import { View, Text, FlatList, RefreshControl, Alert } from 'react-native';
+import React, { ReactElement, useCallback, useState } from 'react';
+import TransactionItem from '../components/TransactionItem';
+import { TransactionType } from '../components/models';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import mockData from '../data/mockData.json'
-import useStore from '../store/useStore';
+import mockData from '../data/mockData.json';
 import useAuthorization from '../hooks/useAuthorization';
 
-
 export default function Home(): ReactElement {
-  const [ isRefreshing, setIsRefreshing ] = useState<boolean>(false)
-  const isAuthorized = useStore((state) => state.isAuthorized)
-  const { onAuthorized, onUnauthorized } = useAuthorization()
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const { isAuthorized, toggleAuthorization } = useAuthorization();
 
   const onRefresh = useCallback(() => {
     setIsRefreshing(true);
@@ -23,35 +20,45 @@ export default function Home(): ReactElement {
 
   return (
     <>
-      <View className='mx-2 my-6'>
-        <Text className='font-robotoBold text-4xl'>
-          Welcome back!
-        </Text>
-        <Text className='font-robotoRegular text-xl'>
+      <View className="px-2 py-6 bg-white">
+        <Text className="font-robotoBold text-4xl">Welcome back!</Text>
+        <Text className="font-robotoRegular text-xl">
           You can view your transaction history below.
         </Text>
-        <View className='m-2'>
-        {isAuthorized 
-          ? <FontAwesome5 name="eye" size={24} color="black" onPress={onAuthorized} /> 
-          : <FontAwesome5 name="eye-slash" size={24} color="black" onPress={onUnauthorized}/> }
+        <View className="m-2">
+          {isAuthorized ? (
+            <FontAwesome5
+              name="eye"
+              size={24}
+              color="black"
+              onPress={() => toggleAuthorization()}
+            />
+          ) : (
+            <FontAwesome5
+              name="eye-slash"
+              size={24}
+              color="black"
+              onPress={() => toggleAuthorization()}
+            />
+          )}
         </View>
       </View>
       <FlatList
         data={mockData}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={(transaction) => 
-          <TransactionItem     
-            id={transaction.item.id} 
-            amount={transaction.item.amount} 
-            date={transaction.item.date} 
+        renderItem={(transaction) => (
+          <TransactionItem
+            id={transaction.item.id}
+            amount={transaction.item.amount}
+            date={transaction.item.date}
             description={transaction.item.description}
             type={transaction.item.type as TransactionType}
           />
-        }
+        )}
         refreshControl={
-          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh}/>
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       />
     </>
-  )
+  );
 }
