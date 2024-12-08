@@ -1,50 +1,105 @@
-import { Tabs } from "expo-router";
-import React from "react";
-import { Platform } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageSourcePropType,
+  BackHandler,
+} from 'react-native';
+import React, { ReactElement, useCallback } from 'react';
+import { Tabs, useFocusEffect } from 'expo-router';
+import icons from '../../assets/icons/icons';
+import useStore from '../store/useStore';
 
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+export interface TabIconProps {
+  icon: string | ImageSourcePropType;
+  color: string;
+  name: string;
+  isFocused: boolean;
+}
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+function TabIcon({ icon, color, name, isFocused }: TabIconProps): ReactElement {
+  const source = typeof icon === 'string' ? { uri: icon } : icon;
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
+    <View className="items-center justify-center gap-2">
+      <Image
+        source={source}
+        resizeMode="contain"
+        tintColor={color}
+        className="h-6 w-6"
+      />
+      <Text
+        className={`${isFocused ? 'font-robotoBold' : 'font-robotoRegular'} w-20 text-center`}
+      >
+        {name}
+      </Text>
+    </View>
+  );
+}
+
+export default function TabsLayout(): ReactElement {
+  const isLoggedIn = useStore((state) => state.isLoggedIn);
+
+  // Prevent back button from logging out
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        if (isLoggedIn) {
+          return true;
+        }
+        // If not on home screen, allow back button to work
+        return false;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [isLoggedIn])
+  );
+
+  return (
+    <>
+      <Tabs
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            height: 70,
+            paddingTop: 15,
           },
-          default: {},
-        }),
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
+          headerShown: false,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title: 'Home',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={icons.home}
+                color={color}
+                name="Home"
+                isFocused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="setting"
+          options={{
+            title: 'Home',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={icons.settings}
+                color={color}
+                name="Settings"
+                isFocused={focused}
+              />
+            ),
+          }}
+        />
+      </Tabs>
+    </>
   );
 }
