@@ -4,7 +4,7 @@ export default function LoginLayout() {
   return (
     <Stack
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}
     ></Stack>
   );

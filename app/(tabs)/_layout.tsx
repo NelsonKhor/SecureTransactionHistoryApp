@@ -66,6 +66,7 @@ import {
               height: 70,
               paddingTop: 15,
             },
+            headerShown: false
           }}
         >
           <Tabs.Screen

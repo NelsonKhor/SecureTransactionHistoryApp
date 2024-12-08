@@ -24,7 +24,7 @@ export default function AppLayout() {
   return (
     <SafeAreaProvider>
       <SafeAreaView className="flex-1">
-        <Stack>
+        <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" options={{ headerShown: false }} />
         </Stack>
       </SafeAreaView>
