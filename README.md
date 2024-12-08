@@ -7,7 +7,6 @@ This is a demo secure transaction app built with React Native.
 - Secure access with biometric authentication.
 - View detailed transaction history.
 - Smooth navigation with Expo Router.
-- Optimized for development and testing on mobile devices.
 
 # Tech Stack
 
