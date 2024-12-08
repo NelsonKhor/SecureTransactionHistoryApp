@@ -1,8 +1,8 @@
 import { View, Text, FlatList, RefreshControl, Alert } from 'react-native';
 import React, { ReactElement, useCallback, useState } from 'react';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import TransactionItem from '../components/TransactionItem';
 import { TransactionType } from '../components/models';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import mockData from '../data/mockData.json';
 import useAuthorization from '../hooks/useAuthorization';
 

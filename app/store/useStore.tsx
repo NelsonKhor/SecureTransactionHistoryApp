@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
 interface State {
-  isLoggedin: boolean;
-  setIsLoggedin: (value: boolean) => void;
+  isLoggedIn: boolean;
+  setIsLoggedIn: (value: boolean) => void;
   isAuthorized: boolean;
   setIsAuthorized: (value: boolean) => void;
 }
 
 const useStore = create<State>((set) => ({
-  isLoggedin: false,
-  setIsLoggedin: (value) => set({ isLoggedin: value }),
+  isLoggedIn: false,
+  setIsLoggedIn: (value) => set({ isLoggedIn: value }),
   isAuthorized: false,
   setIsAuthorized: (value) => set({ isAuthorized: value }),
 }));

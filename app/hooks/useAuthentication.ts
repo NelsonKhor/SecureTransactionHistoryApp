@@ -1,31 +1,34 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
 import { router } from 'expo-router';
-import * as LocalAuthentication from "expo-local-authentication"
+import * as LocalAuthentication from 'expo-local-authentication';
 import useStore from '../store/useStore';
 
 export interface AuthenticationHook {
-    isBiometricSupported: boolean
-    onLogin: () => Promise<void>
-    onLogout: () => Promise<void>
+  isBiometricSupported: boolean;
+  onLogin: () => Promise<void>;
+  onLogout: () => Promise<void>;
 }
 
 export default function useAuthentication(): AuthenticationHook {
-  const [isBiometricSupported, setIsBiometricSupported] = useState<boolean>(false);
-  const setIsLoggedin = useStore((state) => state.setIsLoggedin);
+  const [isBiometricSupported, setIsBiometricSupported] =
+    useState<boolean>(false);
+  const setIsLoggedIn = useStore((state) => state.setIsLoggedIn);
 
   async function onLogin(): Promise<void> {
     try {
-      const hasHardwareAuth = await LocalAuthentication.hasHardwareAsync()
-      const isEnrolledAuth = await LocalAuthentication.isEnrolledAsync()
-      const supportedAuth = await LocalAuthentication.supportedAuthenticationTypesAsync()
+      const hasHardwareAuth = await LocalAuthentication.hasHardwareAsync();
+      const isEnrolledAuth = await LocalAuthentication.isEnrolledAsync();
+      const supportedAuth =
+        await LocalAuthentication.supportedAuthenticationTypesAsync();
 
-      setIsBiometricSupported(supportedAuth.length > 0)
-      
+      setIsBiometricSupported(supportedAuth.length > 0);
+
       if (hasHardwareAuth && isEnrolledAuth) {
-        const respond: LocalAuthentication.LocalAuthenticationResult = await LocalAuthentication.authenticateAsync();
+        const respond: LocalAuthentication.LocalAuthenticationResult =
+          await LocalAuthentication.authenticateAsync();
         if (respond.success) {
-          setIsLoggedin(true);
+          setIsLoggedIn(true);
           router.push('/home');
         }
       } else {
@@ -47,14 +50,13 @@ export default function useAuthentication(): AuthenticationHook {
 
   async function onLogout(): Promise<void> {
     try {
-      setIsLoggedin(false)
-    } catch (error) {
-    }
+      setIsLoggedIn(false);
+    } catch (error) {}
   }
 
   return {
     isBiometricSupported,
     onLogin,
     onLogout,
-  }
+  };
 }
