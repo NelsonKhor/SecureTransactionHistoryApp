@@ -28,8 +28,8 @@ This is a demo secure transaction app built with React Native.
 1. Clone the repository
 
    ```bash
-      git clone https://github.com/NelsonKhor/SecureTransactionHistoryApp.git
-      cd SecureTransactionHistoryApp
+   git clone https://github.com/NelsonKhor/SecureTransactionHistoryApp.git
+   cd SecureTransactionHistoryApp
    ```
 
 2. Install dependencies
@@ -41,7 +41,7 @@ This is a demo secure transaction app built with React Native.
 3. Start the app
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
 4. Launch the app in Expo Go
